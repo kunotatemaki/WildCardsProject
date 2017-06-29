@@ -133,4 +133,3 @@ google-services.json
 
 # End of https://www.gitignore.io/api/androidstudio
 app/libs/
-app/src/main/res/drawable/
