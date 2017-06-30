@@ -97,6 +97,92 @@
             android:layout_height="wrap_content"
             android:layout_width="0dp"/>
 
+        <ImageView
+            android:id="@+id/work_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            app:srcCompat="@drawable/ic_work_black_24dp"
+            android:layout_marginStart="@dimen/icon_margin"
+            android:tint="@color/grey_800"
+            android:layout_marginTop="@dimen/icon_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@+id/about_background"
+            app:layout_constraintLeft_toLeftOf="@+id/pic_background" />
+
+        <ImageView
+            android:id="@+id/age_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_swap_vert_black_24dp"
+            android:tint="@color/grey_800"
+            android:layout_marginStart="@dimen/icon_margin"
+            android:layout_marginTop="@dimen/icon_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@+id/work_icon"
+            app:layout_constraintLeft_toLeftOf="@+id/pic_background" />
+
+        <ImageView
+            android:id="@+id/smoking_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_smoking_rooms_black_24dp"
+            android:tint="@color/grey_800"
+            android:layout_marginStart="@dimen/icon_margin"
+            android:layout_marginTop="@dimen/icon_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@+id/age_icon"
+            app:layout_constraintLeft_toLeftOf="@+id/pic_background"/>
+
+        <ImageView
+            android:id="@+id/children_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_child_friendly_black_24dp"
+            android:tint="@color/grey_800"
+            android:layout_marginStart="@dimen/icon_margin"
+            android:layout_marginTop="@dimen/icon_vertical_margin"
+            app:layout_constraintTop_toBottomOf="@+id/smoking_icon"
+            app:layout_constraintLeft_toLeftOf="@+id/pic_background" />
+
+        <TextView
+            android:id="@+id/work_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Puta de lujo"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintLeft_toRightOf="@+id/work_icon"
+            android:layout_marginStart="@dimen/text_margin"
+            app:layout_constraintTop_toTopOf="@+id/work_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/work_icon" />
+<TextView
+            android:id="@+id/age_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="con 17 sobra"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintLeft_toRightOf="@+id/age_icon"
+            android:layout_marginStart="@dimen/text_margin"
+            app:layout_constraintTop_toTopOf="@+id/age_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/age_icon" />
+<TextView
+            android:id="@+id/smoking_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="como un carretero"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintLeft_toRightOf="@+id/smoking_icon"
+            android:layout_marginStart="@dimen/text_margin"
+            app:layout_constraintTop_toTopOf="@+id/smoking_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/smoking_icon" />
+<TextView
+            android:id="@+id/children_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="si me descuido"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            app:layout_constraintLeft_toRightOf="@+id/children_icon"
+            android:layout_marginStart="@dimen/text_margin"
+            app:layout_constraintTop_toTopOf="@+id/children_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/children_icon" />
+
 
     </android.support.constraint.ConstraintLayout>
 
