@@ -12,9 +12,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.signature.MediaStoreSignature;
 import com.rukiasoft.wildcardsproject.ui.GlideCircleTransform;
 
-import java.io.File;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class ImageUtils {
     public static Bitmap getCircularBitmapImage(Bitmap source) {

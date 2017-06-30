@@ -14,12 +14,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import icepick.State;
 
 public class StackedViewsActivity extends ToolbarActivity implements SwipeCardListener {
 
     // region Constants
     private static final int STACK_SIZE = 4;
-    private static final String INDEX_FIELD = "index";
+
     // endregion
 
     // region Views
@@ -31,22 +32,20 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
     // region Member Variables
     private List<User> users;
     int index;
-    int indexShown = 0;
+    @State int topPicture;
 
     public StackedViewsActivity() {
     }
     // endregion
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stacked_views);
         ButterKnife.bind(this);
 
-        if(savedInstanceState != null && savedInstanceState.containsKey(INDEX_FIELD)){
-            indexShown = savedInstanceState.getInt(INDEX_FIELD);
-        }
-        index = indexShown;
+        index = topPicture;
+
         this.setToolbar(mToolbar);
 
         wildCardsStackLayout.setAddCardListener(this);
@@ -56,11 +55,6 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
         while(addWildCard()){
             addWildCard();
         }
-    }
-
-    @Override public void onSaveInstanceState(Bundle outState) {
-        outState.putInt(INDEX_FIELD, indexShown);
-        super.onSaveInstanceState(outState);
     }
 
 
@@ -86,6 +80,6 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
 
     @Override
     public void decrementCounterCard() {
-        indexShown++;
+        topPicture++;
     }
 }

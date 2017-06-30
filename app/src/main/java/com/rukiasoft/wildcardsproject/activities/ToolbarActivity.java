@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
+import icepick.Icepick;
 
 
 /**
@@ -35,14 +36,14 @@ import java.lang.reflect.Field;
 public abstract class ToolbarActivity extends AppCompatActivity {
 
 
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
     }
 
     @Override public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
     protected void setDefaultValuesForOptions(int id){

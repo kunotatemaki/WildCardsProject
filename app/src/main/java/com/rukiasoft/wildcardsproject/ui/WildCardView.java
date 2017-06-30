@@ -32,7 +32,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
 
     // region Constants
     private static final float CARD_ROTATION_DEGREES = 40.0f;
-    private static final float CARD_ROTATION_Y_DEGREES = -45.0f;
+    private static final float CARD_ROTATION_Y_DEGREES = -65.0f;
     private static final float BADGE_ROTATION_DEGREES = 15.0f;
     private static final int DURATION = 300;
     private static final int DURATION_FIRST_ROTATION = 500;
