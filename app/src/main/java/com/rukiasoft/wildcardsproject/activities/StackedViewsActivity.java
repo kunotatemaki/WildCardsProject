@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import com.rukiasoft.wildcardsproject.R;
 import com.rukiasoft.wildcardsproject.models.PopulateUser;
 import com.rukiasoft.wildcardsproject.models.User;
-import com.rukiasoft.wildcardsproject.ui.SwipeCardListener;
+import com.rukiasoft.wildcardsproject.ui.CardListener;
 import com.rukiasoft.wildcardsproject.ui.WildCardView;
 import com.rukiasoft.wildcardsproject.ui.WildCardsStackLayout;
 
@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import icepick.State;
 
-public class StackedViewsActivity extends ToolbarActivity implements SwipeCardListener {
+public class StackedViewsActivity extends ToolbarActivity implements CardListener {
 
     // region Constants
     private static final int STACK_SIZE = 4;
@@ -33,6 +33,7 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
     private List<User> users;
     int index;
     @State int topPicture;
+    @State boolean topCardRotated;
 
     public StackedViewsActivity() {
     }
@@ -48,26 +49,27 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
 
         this.setToolbar(mToolbar);
 
-        wildCardsStackLayout.setAddCardListener(this);
+        wildCardsStackLayout.setCardListener(this);
 
         users = PopulateUser.getUsers(getApplicationContext());
 
-        while(addWildCard()){
-            addWildCard();
+        boolean rotated = topCardRotated;
+        while(addWildCard(rotated)){
+            rotated = false;
         }
     }
 
 
-    private boolean addWildCard(){
+    private boolean addWildCard(boolean rotated){
         if(wildCardsStackLayout.getChildCount() >= STACK_SIZE || index >= users.size()){
             return false;
         }
-        wildCardsStackLayout.addCard(getNextWildCard());
+        wildCardsStackLayout.addCard(getNextWildCard(rotated));
         return true;
     }
 
-    private WildCardView getNextWildCard(){
-        WildCardView tc = new WildCardView(this);
+    private WildCardView getNextWildCard(boolean rotated){
+        WildCardView tc = new WildCardView(this, rotated);
         tc.bind(users.get(index));
         index++;
         return tc;
@@ -75,11 +77,16 @@ public class StackedViewsActivity extends ToolbarActivity implements SwipeCardLi
 
     @Override
     public void addCard() {
-        addWildCard();
+        addWildCard(false);
     }
 
     @Override
     public void decrementCounterCard() {
         topPicture++;
+    }
+
+    @Override
+    public void updateStatusTopCard() {
+        topCardRotated = !topCardRotated;
     }
 }

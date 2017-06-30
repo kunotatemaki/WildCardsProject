@@ -2,6 +2,7 @@ package com.rukiasoft.wildcardsproject.ui;
 
 import android.animation.Animator;
 import android.content.Context;
+import android.os.Parcelable;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -23,6 +24,8 @@ import com.rukiasoft.wildcardsproject.utilities.ImageUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import icepick.Icepick;
+import icepick.State;
 
 /**
  * Created by roll on 29/06/17.
@@ -32,7 +35,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
 
     // region Constants
     private static final float CARD_ROTATION_DEGREES = 40.0f;
-    private static final float CARD_ROTATION_Y_DEGREES = -65.0f;
+    private static final float CARD_ROTATION_Y_DEGREES = -40.0f;
     private static final float BADGE_ROTATION_DEGREES = 15.0f;
     private static final int DURATION = 300;
     private static final int DURATION_FIRST_ROTATION = 500;
@@ -56,7 +59,6 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     private float oldX;
     private float oldY;
     private float rawX;
-    //private boolean isRotated = false;
     private float rightBoundary;
     private float leftBoundary;
     private int screenWidth;
@@ -65,21 +67,13 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     // endregion
 
     // region Constructors
-    public WildCardView(Context context) {
+    public WildCardView(Context context, boolean rotated) {
         super(context);
-        init(context, null);
+        init(context, rotated);
     }
 
-    public WildCardView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
-    }
 
-    public WildCardView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context, attrs);
-    }
-    // endregion
+
 
     // region View.OnTouchListener Methods
     @Override
@@ -146,8 +140,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
     // region Helper Methods
-    private void init(Context context, AttributeSet attrs) {
-
+    private void init(Context context, boolean rotated) {
         if (!isInEditMode()) {
             View view = inflate(context, R.layout.wild_card, this);
 
@@ -166,6 +159,10 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                     flipCard((View) rootCV.getParent(), true);
                 }
             });
+            if(rotated) {
+                changeStatusView(frontCard);
+                changeStatusView(backCard);
+            }
 
             setOnTouchListener(this);
         }
@@ -229,6 +226,8 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
     private void flipCard(final View view, boolean delayed){
+        WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout)view.getParent());
+        wildCardsStackLayout.updateStatusTopCard();
         cardInactive = true;
         int duration = delayed? 2*DURATION_FIRST_ROTATION : DURATION_FIRST_ROTATION;
         view.animate()
@@ -237,9 +236,9 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                 .setDuration(duration);
 
 
+        view.setRotationY(90);
         changeStatusView(backCard);
         changeStatusView(frontCard);
-        view.setRotationY(90);
 
         view.animate()
                 .x(0)

@@ -1,6 +1,7 @@
 package com.rukiasoft.wildcardsproject.ui;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ public class WildCardsStackLayout extends FrameLayout {
     // endregion
 
     // region listeners
-    SwipeCardListener addCardListener;
+    CardListener cardListener;
     // endregion
 
     // region Constructors
@@ -46,16 +47,16 @@ public class WildCardsStackLayout extends FrameLayout {
     // endregion
 
 
-    public void setAddCardListener(SwipeCardListener addCardListener) {
-        this.addCardListener = addCardListener;
+    public void setCardListener(CardListener cardListener) {
+        this.cardListener = cardListener;
     }
 
     @Override
     public void removeView(View view) {
         super.removeView(view);
         updateChildPositions();
-        addCardListener.addCard();
-        addCardListener.decrementCounterCard();
+        cardListener.addCard();
+        cardListener.decrementCounterCard();
     }
 
 
@@ -105,6 +106,9 @@ public class WildCardsStackLayout extends FrameLayout {
             .setDuration(DURATION);
     }
 
+    public void updateStatusTopCard(){
+        cardListener.updateStatusTopCard();
+    }
 
     // endregion
 }
