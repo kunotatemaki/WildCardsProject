@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.rukiasoft.wildcardsproject.R;
 import com.rukiasoft.wildcardsproject.models.PopulateUser;
 import com.rukiasoft.wildcardsproject.models.User;
+import com.rukiasoft.wildcardsproject.ui.AddCardListener;
 import com.rukiasoft.wildcardsproject.ui.WildCardView;
 import com.rukiasoft.wildcardsproject.ui.WildCardsStackLayout;
 
@@ -14,7 +15,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class StackedViewsActivity extends AppCompatActivity {
+public class StackedViewsActivity extends AppCompatActivity implements AddCardListener {
 
     // region Constants
     private static final int STACK_SIZE = 4;
@@ -38,13 +39,32 @@ public class StackedViewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stacked_views);
         ButterKnife.bind(this);
 
+        wildCardsStackLayout.setAddCardListener(this);
+
         users = PopulateUser.getUsers(getApplicationContext());
 
-        WildCardView tc;
-        for(int i = index; index<i+STACK_SIZE; index++){
-            tc = new WildCardView(this);
-            tc.bind(users.get(index));
-            wildCardsStackLayout.addCard(tc);
+        while(addWildCard()){
+            addWildCard();
         }
+    }
+
+    private boolean addWildCard(){
+        if(wildCardsStackLayout.getChildCount() >= STACK_SIZE || index >= users.size()){
+            return false;
+        }
+        wildCardsStackLayout.addCard(getNextWildCard());
+        return true;
+    }
+
+    private WildCardView getNextWildCard(){
+        WildCardView tc = new WildCardView(this);
+        tc.bind(users.get(index));
+        index++;
+        return tc;
+    }
+
+    @Override
+    public void addCard() {
+        addWildCard();
     }
 }

@@ -25,6 +25,10 @@ public class WildCardsStackLayout extends FrameLayout {
     private int yMultiplier;
     // endregion
 
+    // region listeners
+    AddCardListener addCardListener;
+    // endregion
+
     // region Constructors
     public WildCardsStackLayout(Context context) {
         super(context);
@@ -42,6 +46,11 @@ public class WildCardsStackLayout extends FrameLayout {
     }
     // endregion
 
+
+    public void setAddCardListener(AddCardListener addCardListener) {
+        this.addCardListener = addCardListener;
+    }
+
     @Override
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         super.addView(child, index, params);
@@ -51,6 +60,8 @@ public class WildCardsStackLayout extends FrameLayout {
     @Override
     public void removeView(View view) {
         super.removeView(view);
+        updateChildPositions();
+        addCardListener.addCard();
         // TODO: 29/6/17 evento
     }
 
@@ -70,6 +81,26 @@ public class WildCardsStackLayout extends FrameLayout {
 
 
         setUpRxBusSubscription();
+    }
+
+    public void updateChildPositions(){
+        int childCount = getChildCount();
+        for(int i=childCount-1; i>=0; i--) {
+            WildCardView wildCardView = (WildCardView) getChildAt(i);
+
+            if (wildCardView != null) {
+
+                float scaleValue = 1 - ((childCount - 2 - i) / 50.0f);
+
+                wildCardView.animate()
+                        .x(0)
+                        .y((childCount - 1 - i) * yMultiplier)
+                        .scaleX(scaleValue)
+                        .rotation(0)
+                        .setInterpolator(new AnticipateOvershootInterpolator())
+                        .setDuration(DURATION);
+            }
+        }
     }
 
     private void setUpRxBusSubscription(){
@@ -130,5 +161,7 @@ public class WildCardsStackLayout extends FrameLayout {
             .setInterpolator(new AnticipateOvershootInterpolator())
             .setDuration(DURATION);
     }
+
+
     // endregion
 }
