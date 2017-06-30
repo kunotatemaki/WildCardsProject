@@ -2,10 +2,10 @@ package com.rukiasoft.wildcardsproject.ui;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.os.Parcelable;
+import android.os.Handler;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +24,7 @@ import com.rukiasoft.wildcardsproject.utilities.ImageUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import icepick.Icepick;
-import icepick.State;
+
 
 /**
  * Created by roll on 29/06/17.
@@ -43,16 +42,20 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     // endregion
 
     // region Views
-    @BindView(R.id.user_image) ImageView userImageView;
-    @BindView(R.id.user_name_tv) TextView userNameTextView;
-    @BindView(R.id.nope_tv) TextView nopeTextView;
+    @BindView(R.id.user_image)
+    ImageView userImageView;
+    @BindView(R.id.user_name_tv)
+    TextView userNameTextView;
+    @BindView(R.id.nope_tv)
+    TextView nopeTextView;
     @BindView(R.id.front_card)
-    RelativeLayout frontCard;
-    @BindView(R.id.back_card) RelativeLayout backCard;
+    ConstraintLayout frontCard;
+    @BindView(R.id.back_card)
+    RelativeLayout backCard;
     @BindView(R.id.root_cv)
     CardView rootCV;
     @BindView(R.id.flip_button)
-    Button flipButton;
+    ImageView flipButton;
     // endregion
 
     // region Member Variables
@@ -73,15 +76,13 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
 
-
-
     // region View.OnTouchListener Methods
     @Override
     public boolean onTouch(final View view, MotionEvent motionEvent) {
-        WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout)view.getParent());
-        WildCardView topCard = (WildCardView) wildCardsStackLayout.getChildAt(wildCardsStackLayout.getChildCount()-1);
-        if(topCard.equals(view)){
-            switch(motionEvent.getAction()){
+        WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout) view.getParent());
+        WildCardView topCard = (WildCardView) wildCardsStackLayout.getChildAt(wildCardsStackLayout.getChildCount() - 1);
+        if (topCard.equals(view)) {
+            switch (motionEvent.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     oldX = motionEvent.getX();
                     oldY = motionEvent.getY();
@@ -90,19 +91,19 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                     view.clearAnimation();
                     return true;
                 case MotionEvent.ACTION_UP:
-                    if(cardInactive){
+                    if (cardInactive) {
                         cardInactive = false;
                         return true;
                     }
-                    if(isCardBeyondLeftBoundary(view)){
+                    if (isCardBeyondLeftBoundary(view)) {
                         dismissCard(view, -(screenWidth * 2));
-                    } else{
+                    } else {
                         resetCard(view);
                     }
                     return true;
                 case MotionEvent.ACTION_MOVE:
 
-                    if(cardInactive){
+                    if (cardInactive) {
                         return true;
                     }
                     float newX = motionEvent.getX();
@@ -114,7 +115,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
 
                     float posX = view.getX() + dX;
 
-                    if(isInDiscardSide()) {
+                    if (isInDiscardSide()) {
 
                         // Set new position
                         view.setX(view.getX() + dX);
@@ -125,7 +126,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
 
                     updateAlphaOfBadges(posX);
                     return true;
-                default :
+                default:
                     return super.onTouchEvent(motionEvent);
             }
         }
@@ -149,17 +150,25 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
             nopeTextView.setRotation(BADGE_ROTATION_DEGREES);
 
             screenWidth = DisplayUtility.getScreenWidth(context);
-            leftBoundary =  screenWidth * (1.0f/6.0f); // Left 1/6 of screen
-            rightBoundary = screenWidth * (5.0f/6.0f); // Right 1/6 of screen
+            leftBoundary = screenWidth * (1.0f / 6.0f); // Left 1/6 of screen
+            rightBoundary = screenWidth * (5.0f / 6.0f); // Right 1/6 of screen
             padding = DisplayUtility.dp2px(context, 16);
 
             flipButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    flipCard((View) rootCV.getParent(), true);
+                    // Give some time to the ripple to finish the effect
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            flipCard((View) rootCV.getParent(), true);
+                        }
+                    }, 200);
+
+
                 }
             });
-            if(rotated) {
+            if (rotated) {
                 changeStatusView(frontCard);
                 changeStatusView(backCard);
             }
@@ -169,12 +178,12 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
     // Check if card's middle is beyond the left boundary
-    private boolean isCardBeyondLeftBoundary(View view){
+    private boolean isCardBeyondLeftBoundary(View view) {
         return (view.getX() + (view.getWidth() / 2) < leftBoundary);
     }
 
 
-    private void dismissCard(final View view, int xPos){
+    private void dismissCard(final View view, int xPos) {
         view.animate()
                 .x(xPos)
                 .y(0)
@@ -189,7 +198,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                     @Override
                     public void onAnimationEnd(Animator animator) {
                         ViewGroup viewGroup = (ViewGroup) view.getParent();
-                        if(viewGroup != null) {
+                        if (viewGroup != null) {
                             viewGroup.removeView(view);
                         }
                     }
@@ -206,11 +215,11 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                 });
     }
 
-    private void resetCard(View view){
+    private void resetCard(View view) {
         float rotationY = view.getRotationY();
-        if(rotationY > CARD_ROTATION_Y_DEGREES){
+        if (rotationY > CARD_ROTATION_Y_DEGREES) {
             rotationY = 0;
-        }else{
+        } else {
             rotationY = -180;
         }
 
@@ -225,11 +234,13 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
         nopeTextView.setAlpha(0);
     }
 
-    private void flipCard(final View view, boolean delayed){
-        WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout)view.getParent());
+    private void flipCard(final View view, boolean fromButton) {
+        WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout) view.getParent());
         wildCardsStackLayout.updateStatusTopCard();
-        cardInactive = true;
-        int duration = delayed? 2*DURATION_FIRST_ROTATION : DURATION_FIRST_ROTATION;
+        if(!fromButton) {
+            cardInactive = true;
+        }
+        int duration = fromButton ? 2 * DURATION_FIRST_ROTATION : DURATION_FIRST_ROTATION;
         view.animate()
                 .rotationY(-90)
                 .setInterpolator(new AccelerateInterpolator())
@@ -249,18 +260,17 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                 .setDuration(DURATION_SECOND_ROTATION);
 
 
-
     }
 
-    private void changeStatusView(View view){
+    private void changeStatusView(View view) {
         int alpha = Float.valueOf(view.getAlpha()).intValue();
         alpha ^= 1;
         view.setAlpha(alpha);
-        view.setVisibility(view.getVisibility()==INVISIBLE? VISIBLE : INVISIBLE);
+        view.setVisibility(view.getVisibility() == INVISIBLE ? VISIBLE : INVISIBLE);
     }
 
-    private void setCardRotation(View view, float posX){
-        if(isInDiscardSide()) {
+    private void setCardRotation(View view, float posX) {
+        if (isInDiscardSide()) {
             float rotation = (CARD_ROTATION_DEGREES * (posX)) / screenWidth;
             int halfCardHeight = (view.getHeight() / 2);
             if (oldY < halfCardHeight - (2 * padding)) {
@@ -268,29 +278,29 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
             } else {
                 view.setRotation(-rotation);
             }
-        }else{
-            float rotation = CARD_ROTATION_Y_DEGREES * (rawX - oldX) / (rightBoundary-oldX);
-            if(rotation < CARD_ROTATION_Y_DEGREES){
+        } else {
+            float rotation = CARD_ROTATION_Y_DEGREES * (rawX - oldX) / (rightBoundary - oldX);
+            if (rotation < CARD_ROTATION_Y_DEGREES) {
                 flipCard(view, false);
-            }else {
+            } else {
                 view.setRotationY(rotation);
             }
         }
     }
 
-    private boolean isInDiscardSide(){
+    private boolean isInDiscardSide() {
         return rawX <= oldX;
     }
 
     // set alpha of like and nope badges
-    private void updateAlphaOfBadges(float posX){
+    private void updateAlphaOfBadges(float posX) {
         float alpha = (posX - padding) / (screenWidth * 0.50f);
-        alpha = alpha > -0.1? 0 : alpha;
+        alpha = alpha > -0.1 ? 0 : alpha;
         nopeTextView.setAlpha(-alpha);
     }
 
-    public void bind(User user){
-        if(user == null)
+    public void bind(User user) {
+        if (user == null)
             return;
 
         setUpImage(userImageView, user);
@@ -298,23 +308,23 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
         // TODO: 29/6/17 meter aquí todas las demás propiedades
     }
 
-    private void setUpImage(ImageView iv, User user){
+    private void setUpImage(ImageView iv, User user) {
         String pictureUrl = user.getPictureUrl();
-        if(!TextUtils.isEmpty(pictureUrl)){
-            ImageUtils.loadImageFromPathInCircle(iv, pictureUrl, R.drawable.e_darling, 0);
+        if (!TextUtils.isEmpty(pictureUrl)) {
+            ImageUtils.loadImageFromPathInCircle(iv, pictureUrl, R.drawable.e_darling, user.getVersion());
 
 
         }
     }
 
-    private void setUpUserName(TextView tv, User user){
+    private void setUpUserName(TextView tv, User user) {
         String userName = user.getUserName();
-        if(!TextUtils.isEmpty(userName)){
+        if (!TextUtils.isEmpty(userName)) {
             tv.setText(userName);
         }
     }
 
-    private void setUpUsername(TextView tv, User user){
+    private void setUpUsername(TextView tv, User user) {
         /*String username = user.getUsername();
         if(!TextUtils.isEmpty(username)){
             tv.setText(username);

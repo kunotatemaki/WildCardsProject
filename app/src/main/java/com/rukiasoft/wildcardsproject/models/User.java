@@ -13,6 +13,7 @@ public class User {
     private String profession;
     private String smokingAttitude;
     private String wishOfChildren;
+    private int version;
     // endregion
 
     // region Constructors
@@ -51,7 +52,10 @@ public class User {
         return wishOfChildren;
     }
 
-    // endregion
+    public int getVersion() {
+        return version;
+    }
+// endregion
 
     // region Setters
 
@@ -83,6 +87,9 @@ public class User {
         this.wishOfChildren = wishOfChildren;
     }
 
-    // endregion
+    public void setVersion(int version) {
+        this.version = version;
+    }
+// endregion
 
 }

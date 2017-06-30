@@ -53,7 +53,7 @@ public abstract class ToolbarActivity extends AppCompatActivity {
     public void setToolbar(Toolbar toolbar){
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             try {
                 if (toolbar.getClass() != null) {
