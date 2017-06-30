@@ -35,6 +35,11 @@ public class PopulateUser {
         user.setPictureUrl(avatarUrls[index]);
         user.setUserName(displayNames[index]);
         user.setVersion(versions[index]);
+        user.setCity("Villalpando");
+        user.setSmokingAttitude("muchísimo");
+        user.setUserAge(19);
+        user.setProfession("Robador de cobre");
+        user.setWishOfChildren("Si me los cuidan...");
         return user;
     }
 }

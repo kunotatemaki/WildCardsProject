@@ -48,6 +48,16 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     TextView userNameTextView;
     @BindView(R.id.nope_tv)
     TextView nopeTextView;
+    @BindView(R.id.user_city_tv)
+    TextView cityTextView;
+    @BindView(R.id.work_tv)
+    TextView workTextView;
+    @BindView(R.id.age_tv)
+    TextView ageTextView;
+    @BindView(R.id.smoking_tv)
+    TextView smokingTextView;
+    @BindView(R.id.children_tv)
+    TextView childrenTextView;
     @BindView(R.id.front_card)
     ConstraintLayout frontCard;
     @BindView(R.id.back_card)
@@ -56,6 +66,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     CardView rootCV;
     @BindView(R.id.flip_button)
     ImageView flipButton;
+
     // endregion
 
     // region Member Variables
@@ -240,7 +251,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
         if(!fromButton) {
             cardInactive = true;
         }
-        int duration = fromButton ? 2 * DURATION_FIRST_ROTATION : DURATION_FIRST_ROTATION;
+        int duration = fromButton ? 3 * DURATION_FIRST_ROTATION : DURATION_FIRST_ROTATION;
         view.animate()
                 .rotationY(-90)
                 .setInterpolator(new AccelerateInterpolator())
@@ -304,8 +315,12 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
             return;
 
         setUpImage(userImageView, user);
-        setUpUserName(userNameTextView, user);
-        // TODO: 29/6/17 meter aquí todas las demás propiedades
+        setTextView(userNameTextView, user.getUserName());
+        setTextView(ageTextView, String.valueOf(user.getUserAge()));
+        setTextView(smokingTextView, user.getSmokingAttitude());
+        setTextView(workTextView, user.getProfession());
+        setTextView(childrenTextView, user.getWishOfChildren());
+        setTextView(cityTextView, user.getCity());
     }
 
     private void setUpImage(ImageView iv, User user) {
@@ -317,19 +332,13 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
         }
     }
 
-    private void setUpUserName(TextView tv, User user) {
-        String userName = user.getUserName();
-        if (!TextUtils.isEmpty(userName)) {
-            tv.setText(userName);
+    private void setTextView(TextView tv, String text) {
+        if (!TextUtils.isEmpty(text)) {
+            tv.setText(text);
         }
     }
 
-    private void setUpUsername(TextView tv, User user) {
-        /*String username = user.getUsername();
-        if(!TextUtils.isEmpty(username)){
-            tv.setText(username);
-        }*/
-    }
+
 
     // endregion
 }

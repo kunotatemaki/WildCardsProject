@@ -8,7 +8,7 @@ public class User {
     // region Member Variables
     private String pictureUrl;
     private String userName;
-    private String userAge;
+    private int userAge;
     private String city;
     private String profession;
     private String smokingAttitude;
@@ -32,7 +32,7 @@ public class User {
         return userName;
     }
 
-    public String getUserAge() {
+    public int getUserAge() {
         return userAge;
     }
 
@@ -67,7 +67,7 @@ public class User {
         this.userName = userName;
     }
 
-    public void setUserAge(String userAge) {
+    public void setUserAge(int userAge) {
         this.userAge = userAge;
     }
 

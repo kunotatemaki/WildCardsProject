@@ -13,7 +13,8 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/front_card"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/activity_margin">
 
         <ImageView
             android:id="@+id/pic_background"
