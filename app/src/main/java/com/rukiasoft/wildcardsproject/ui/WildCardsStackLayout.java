@@ -21,12 +21,11 @@ public class WildCardsStackLayout extends FrameLayout {
     // endregion
 
     // region Member Variables
-    private int screenWidth;
     private int yMultiplier;
     // endregion
 
     // region listeners
-    AddCardListener addCardListener;
+    SwipeCardListener addCardListener;
     // endregion
 
     // region Constructors
@@ -47,14 +46,8 @@ public class WildCardsStackLayout extends FrameLayout {
     // endregion
 
 
-    public void setAddCardListener(AddCardListener addCardListener) {
+    public void setAddCardListener(SwipeCardListener addCardListener) {
         this.addCardListener = addCardListener;
-    }
-
-    @Override
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        super.addView(child, index, params);
-        // TODO: 29/6/17 evento
     }
 
     @Override
@@ -62,25 +55,17 @@ public class WildCardsStackLayout extends FrameLayout {
         super.removeView(view);
         updateChildPositions();
         addCardListener.addCard();
-        // TODO: 29/6/17 evento
+        addCardListener.decrementCounterCard();
     }
 
-    @Override
-    public void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
-        // TODO: 29/6/17 suscripción???
-    }
 
     // region Helper Methods
     private void init(){
         setClipChildren(false);
 
-        screenWidth = DisplayUtility.getScreenWidth(getContext());
         yMultiplier = DisplayUtility.dp2px(getContext(), 8);
 
 
-
-        setUpRxBusSubscription();
     }
 
     public void updateChildPositions(){
@@ -101,48 +86,6 @@ public class WildCardsStackLayout extends FrameLayout {
                         .setDuration(DURATION);
             }
         }
-    }
-
-    private void setUpRxBusSubscription(){
-        /*Subscription rxBusSubscription = RxBus.getInstance().toObserverable()
-                .observeOn(AndroidSchedulers.mainThread()) // UI Thread
-                .subscribe(new Action1<Object>() {
-                    @Override
-                    public void call(Object event) {
-                        if (event == null) {
-                            return;
-                        }
-
-                        if(event instanceof TopCardMovedEvent){
-                            float posX = ((TopCardMovedEvent) event).getPosX();
-
-                            int childCount = getChildCount();
-                            for(int i=childCount-2; i>=0; i--){
-                                TinderCardView tinderCardView = (TinderCardView) getChildAt(i);
-
-                                if(tinderCardView != null){
-                                    if(Math.abs(posX) == (float)screenWidth){
-                                        float scaleValue = 1 - ((childCount-2-i)/50.0f);
-
-                                        tinderCardView.animate()
-                                            .x(0)
-                                            .y((childCount-2-i) * yMultiplier)
-                                            .scaleX(scaleValue)
-                                            .rotation(0)
-                                            .setInterpolator(new AnticipateOvershootInterpolator())
-                                            .setDuration(DURATION);
-                                    } else {
-//                                        float multiplier =  (DisplayUtility.dp2px(getContext(), 8)) / (float)screenWidth;
-//                                        float dy = -(Math.abs(posX * multiplier));
-//                                        tinderCard.setTranslationY(dy);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-
-        compositeSubscription.add(rxBusSubscription);*/
     }
 
 
