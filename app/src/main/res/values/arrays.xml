@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="display_names">
+        <item>Marieta</item>
         <item>Megan Fox</item>
         <item>Olivia Wilde</item>
         <item>Jennifer Lawrence</item>
@@ -26,33 +27,8 @@
         <item>Miranda Kerr</item>
     </array>
 
-    <array name="usernames">
-        <item>\@meganfox</item>
-        <item>\@oliviawilde</item>
-        <item>\@Jennifer_Lawrence</item>
-        <item>\@jessicaalba</item>
-        <item>\@itsmeleighton</item>
-        <item>\@haydenpanettier</item>
-        <item>\@ashleytisdale</item>
-        <item>\@AidaYespica</item>
-        <item>\@AdrianaLima</item>
-        <item>\@AngelAlessandra</item>
-        <item>\@angelcandice</item>
-        <item>\@iamjessicagomes</item>
-        <item>\@genevievemorton</item>
-        <item>\@pnemcova</item>
-        <item>\@LilyAldridge</item>
-        <item>\@KateUpton</item>
-        <item>\@GiGiHadid</item>
-        <item>\@michkeegan</item>
-        <item>\@_KatherineWebb</item>
-        <item>\@ScarlettJ</item>
-        <item>\@katharinemcphee</item>
-        <item>\@LucyPinder</item>
-        <item>\@MirandaKerr</item>
-    </array>
-
     <array name="avatar_urls">
+        <item>file:///android_asset/marieta.jpeg</item>
         <item>http://imgs.globovision.com/8q4wW2b3CHzu0ZDlhmHrNPXK0ko=/700x0/smart/64b884d833924898bc8256e99bc5b410</item>
         <item>http://itsybitsysteps.com/wp-content/uploads/2013/10/olivia-wilde.jpg</item>
         <item>http://img4.wikia.nocookie.net/__cb20120224061953/xmenmovies/images/c/cf/Jennifer-Lawrence.jpg</item>

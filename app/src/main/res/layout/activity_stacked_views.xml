@@ -15,11 +15,11 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/cards_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="1dp"
         tools:text="Quedan 18 cartas"
         android:layout_marginStart="@dimen/text_margin"
         app:layout_constraintRight_toRightOf="@+id/include"
@@ -29,12 +29,15 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
+
     <com.rukiasoft.wildcardsproject.ui.WildCardsStackLayout
         android:id="@+id/wildcardstack"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cards_left"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.content.Context;
 import android.os.Handler;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.MotionEvent;
@@ -11,10 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
+import android.widget.AutoCompleteTextView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.rukiasoft.wildcardsproject.R;
@@ -24,6 +24,7 @@ import com.rukiasoft.wildcardsproject.utilities.ImageUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -41,7 +42,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     private static final int DURATION_SECOND_ROTATION = 750;
     // endregion
 
-    // region Views
+    // region Views to bind
     @BindView(R.id.user_image)
     ImageView userImageView;
     @BindView(R.id.user_name_tv)
@@ -61,11 +62,15 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     @BindView(R.id.front_card)
     ConstraintLayout frontCard;
     @BindView(R.id.back_card)
-    RelativeLayout backCard;
+    ConstraintLayout backCard;
     @BindView(R.id.root_cv)
     CardView rootCV;
     @BindView(R.id.flip_button)
     ImageView flipButton;
+    @BindView(R.id.message_text)
+    AutoCompleteTextView messageText;
+    @BindView(R.id.send_button)
+    FloatingActionButton sendButton;
 
     // endregion
 
@@ -87,7 +92,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
 
-    // region View.OnTouchListener Methods
+    // region listeners Methods
     @Override
     public boolean onTouch(final View view, MotionEvent motionEvent) {
         WildCardsStackLayout wildCardsStackLayout = ((WildCardsStackLayout) view.getParent());
@@ -143,6 +148,22 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
         }
         return super.onTouchEvent(motionEvent);
     }
+
+    @OnClick(R.id.flip_button)
+    public void flipButtonClick(View view){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                flipCard((View) rootCV.getParent(), true);
+            }
+        }, 200);
+    }
+
+    @OnClick(R.id.send_button)
+    public void sendButtonClick(View view){
+        messageText.setText("");
+    }
+
     // endregion
 
     @Override
@@ -165,20 +186,6 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
             rightBoundary = screenWidth * (5.0f / 6.0f); // Right 1/6 of screen
             padding = DisplayUtility.dp2px(context, 16);
 
-            flipButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // Give some time to the ripple to finish the effect
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            flipCard((View) rootCV.getParent(), true);
-                        }
-                    }, 200);
-
-
-                }
-            });
             if (rotated) {
                 changeStatusView(frontCard);
                 changeStatusView(backCard);
@@ -187,6 +194,8 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
             setOnTouchListener(this);
         }
     }
+
+
 
     // Check if card's middle is beyond the left boundary
     private boolean isCardBeyondLeftBoundary(View view) {

@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.signature.MediaStoreSignature;
 import com.rukiasoft.wildcardsproject.ui.GlideCircleTransform;
 
@@ -40,7 +41,9 @@ public class ImageUtils {
                 .centerCrop()
                 .signature(new MediaStoreSignature(WildCardConstants.MIME_TYPE_PICTURE, version, 0))
                 .transform(new GlideCircleTransform(imageView.getContext()))
-                .error(defaultImage)
+                .skipMemoryCache( true )
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                //.error(defaultImage)
                 .into(imageView);
     }
 }

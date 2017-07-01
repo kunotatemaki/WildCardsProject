@@ -6,4 +6,7 @@
     <string name="cards_left">_number_ cards left</string>
     <string name="last_card_left">Last card</string>
     <string name="no_cards_left">No cards to see</string>
+    <string name="hint_message">Type message</string>
+    <string name="flip_card_button">Flip card button</string>
+    <string name="no_description" />
 </resources>

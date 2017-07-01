@@ -8,4 +8,10 @@
     <dimen name="icon_margin">8dp</dimen>
     <dimen name="icon_vertical_margin">16dp</dimen>
     <dimen name="color_margin">4dp</dimen>
+    <dimen name="card_margin_top">36dp</dimen>
+    <dimen name="card_margin">24dp</dimen>
+    <dimen name="message_bottom_margin">24dp</dimen>
+    <dimen name="user_image_high_margin">200dp</dimen>
+    <dimen name="card_margin_bottom">8dp</dimen>
+
 </resources>
