@@ -1,6 +1,7 @@
 package com.rukiasoft.wildcardsproject.activities;
 
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
@@ -33,7 +34,7 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
     // endregion
 
     // region Member Variables
-    private List<User> users;
+    public List<User> users;
     int index;
     @State int topPicture;
     @State boolean topCardRotated;
@@ -41,6 +42,26 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
     public StackedViewsActivity() {
     }
     // endregion
+
+    @VisibleForTesting
+    public void resetUsers(final User user) {
+
+
+                users.clear();
+                wildCardsStackLayout.removeAllViews();
+                users.add(user);
+                index = 0;
+                addCard();
+
+
+
+    }
+
+    @VisibleForTesting
+    public String[] getCardTexts(){
+        WildCardView card = (WildCardView) wildCardsStackLayout.getChildAt(0);
+        return card.getCardTexts();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

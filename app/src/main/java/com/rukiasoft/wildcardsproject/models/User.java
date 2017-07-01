@@ -1,5 +1,7 @@
 package com.rukiasoft.wildcardsproject.models;
 
+import android.support.annotation.VisibleForTesting;
+
 /**
  * Created by roll on 26/06/17.
  */
@@ -20,6 +22,17 @@ public class User {
     public User(){
 
     }
+
+    @VisibleForTesting
+    public User(String userName, int userAge, String city, String profession, String smokingAttitude, String wishOfChildren) {
+        this.userName = userName;
+        this.userAge = userAge;
+        this.city = city;
+        this.profession = profession;
+        this.smokingAttitude = smokingAttitude;
+        this.wishOfChildren = wishOfChildren;
+    }
+
     // endregion
 
     // region Getters

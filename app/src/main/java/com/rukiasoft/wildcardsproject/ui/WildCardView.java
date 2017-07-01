@@ -3,6 +3,7 @@ package com.rukiasoft.wildcardsproject.ui;
 import android.animation.Animator;
 import android.content.Context;
 import android.os.Handler;
+import android.support.annotation.VisibleForTesting;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
@@ -348,6 +349,18 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     }
 
 
+    @VisibleForTesting
+    public String[] getCardTexts(){
+        String[] texts =  {userNameTextView.getText().toString(),
+                cityTextView.getText().toString(),
+                workTextView.getText().toString(),
+                ageTextView.getText().toString(),
+                smokingTextView.getText().toString(),
+                childrenTextView.getText().toString()
+        };
+        return texts;
+
+    }
 
     // endregion
 }
