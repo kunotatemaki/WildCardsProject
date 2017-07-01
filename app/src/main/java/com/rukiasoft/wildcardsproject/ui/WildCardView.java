@@ -326,7 +326,7 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
     private void setUpImage(ImageView iv, User user) {
         String pictureUrl = user.getPictureUrl();
         if (!TextUtils.isEmpty(pictureUrl)) {
-            ImageUtils.loadImageFromPathInCircle(iv, pictureUrl, R.drawable.e_darling, user.getVersion());
+            ImageUtils.loadImageFromPathInCircle(iv, pictureUrl, R.drawable.e_darling, user.getDateModified());
 
 
         }

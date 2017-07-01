@@ -2,6 +2,7 @@ package com.rukiasoft.wildcardsproject.activities;
 
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.widget.TextView;
 
 import com.rukiasoft.wildcardsproject.R;
 import com.rukiasoft.wildcardsproject.models.PopulateUser;
@@ -27,6 +28,8 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
     @BindView(R.id.wildcardstack) WildCardsStackLayout wildCardsStackLayout;
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+    @BindView(R.id.cards_left)
+    TextView cardsLeft;
     // endregion
 
     // region Member Variables
@@ -57,6 +60,7 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
         while(addWildCard(rotated)){
             rotated = false;
         }
+        setCardsLeft();
     }
 
 
@@ -83,10 +87,30 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
     @Override
     public void decrementCounterCard() {
         topPicture++;
+        setCardsLeft();
     }
 
     @Override
     public void updateStatusTopCard() {
         topCardRotated = !topCardRotated;
     }
+
+    public void setCardsLeft() {
+        String sCardsLeft;
+        int nCardsLeft = users.size() - topPicture;
+        switch (nCardsLeft){
+            case 0:
+                sCardsLeft = getResources().getString(R.string.no_cards_left);
+                break;
+            case 1:
+                sCardsLeft = getResources().getString(R.string.last_card_left);
+                break;
+            default:
+                sCardsLeft = getResources().getString(R.string.cards_left);
+                break;
+        }
+        sCardsLeft = sCardsLeft.replace("_number_", String.valueOf(nCardsLeft));
+        cardsLeft.setText(sCardsLeft);
+    }
+
 }

@@ -1,13 +1,14 @@
 package com.rukiasoft.wildcardsproject.ui;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
+import com.rukiasoft.wildcardsproject.R;
 import com.rukiasoft.wildcardsproject.utilities.DisplayUtility;
 
 
@@ -57,6 +58,7 @@ public class WildCardsStackLayout extends FrameLayout {
         updateChildPositions();
         cardListener.addCard();
         cardListener.decrementCounterCard();
+
     }
 
 
@@ -109,6 +111,8 @@ public class WildCardsStackLayout extends FrameLayout {
     public void updateStatusTopCard(){
         cardListener.updateStatusTopCard();
     }
+
+
 
     // endregion
 }

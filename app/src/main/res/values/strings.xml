@@ -3,4 +3,7 @@
     <string name="discardText">NOPE</string>
     <string name="user_image">user image</string>
     <string name="about">About:</string>
+    <string name="cards_left">_number_ cards left</string>
+    <string name="last_card_left">Last card</string>
+    <string name="no_cards_left">No cards to see</string>
 </resources>

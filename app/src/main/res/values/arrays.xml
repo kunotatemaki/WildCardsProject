@@ -51,31 +51,6 @@
         <item>\@LucyPinder</item>
         <item>\@MirandaKerr</item>
     </array>
-    <array name="versions">
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-        <item>1</item>
-    </array>
 
     <array name="avatar_urls">
         <item>http://imgs.globovision.com/8q4wW2b3CHzu0ZDlhmHrNPXK0ko=/700x0/smart/64b884d833924898bc8256e99bc5b410</item>

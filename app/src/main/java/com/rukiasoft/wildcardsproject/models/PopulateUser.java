@@ -14,13 +14,11 @@ import java.util.List;
 public class PopulateUser {
 
     private static String[] displayNames, userNames, avatarUrls;
-    private static int[] versions;
 
     public static List<User> getUsers(Context context){
         displayNames = context.getResources().getStringArray(R.array.display_names);
         userNames = context.getResources().getStringArray(R.array.usernames);
         avatarUrls = context.getResources().getStringArray(R.array.avatar_urls);
-        versions = context.getResources().getIntArray(R.array.versions);
 
         List<User> users = new ArrayList<>();
         for(int i=0; i<displayNames.length; i++){
@@ -34,7 +32,7 @@ public class PopulateUser {
         User user = new User();
         user.setPictureUrl(avatarUrls[index]);
         user.setUserName(displayNames[index]);
-        user.setVersion(versions[index]);
+        user.setDateModified(System.currentTimeMillis());
         user.setCity("Villalpando");
         user.setSmokingAttitude("muchísimo");
         user.setUserAge(19);

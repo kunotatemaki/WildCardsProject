@@ -34,7 +34,7 @@ public class ImageUtils {
         return bitmap;
     }
 
-    public static void loadImageFromPathInCircle(ImageView imageView, String url, int defaultImage, int version) {
+    public static void loadImageFromPathInCircle(ImageView imageView, String url, int defaultImage, long version) {
         Glide.with(imageView.getContext())
                 .load(url)
                 .centerCrop()
