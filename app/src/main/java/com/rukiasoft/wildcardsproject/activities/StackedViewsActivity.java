@@ -43,25 +43,8 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
     }
     // endregion
 
-    @VisibleForTesting
-    public void resetUsers(final User user) {
 
 
-                users.clear();
-                wildCardsStackLayout.removeAllViews();
-                users.add(user);
-                index = 0;
-                addCard();
-
-
-
-    }
-
-    @VisibleForTesting
-    public String[] getCardTexts(){
-        WildCardView card = (WildCardView) wildCardsStackLayout.getChildAt(0);
-        return card.getCardTexts();
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,6 +115,29 @@ public class StackedViewsActivity extends ToolbarActivity implements CardListene
         }
         sCardsLeft = sCardsLeft.replace("_number_", String.valueOf(nCardsLeft));
         cardsLeft.setText(sCardsLeft);
+    }
+
+
+    @VisibleForTesting
+    public void resetUsers(final User user) {
+        users.clear();
+        wildCardsStackLayout.removeAllViews();
+        users.add(user);
+        index = 0;
+        addCard();
+    }
+
+    @VisibleForTesting
+    public int getFrontCardVisibility(){
+        WildCardView card = (WildCardView) wildCardsStackLayout.getChildAt(wildCardsStackLayout.getChildCount()-1);
+        return card.getFrontCardVisibility();
+    }
+
+
+    @VisibleForTesting
+    public String[] getCardTexts(){
+        WildCardView card = (WildCardView) wildCardsStackLayout.getChildAt(wildCardsStackLayout.getChildCount() - 1);
+        return card.getCardTexts();
     }
 
 }

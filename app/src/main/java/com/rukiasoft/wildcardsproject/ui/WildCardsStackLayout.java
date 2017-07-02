@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateOvershootInterpolator;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
-import com.rukiasoft.wildcardsproject.R;
 import com.rukiasoft.wildcardsproject.utilities.DisplayUtility;
 
 

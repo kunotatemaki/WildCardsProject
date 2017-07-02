@@ -359,7 +359,11 @@ public class WildCardView extends FrameLayout implements View.OnTouchListener {
                 childrenTextView.getText().toString()
         };
         return texts;
+    }
 
+    @VisibleForTesting
+    public int getFrontCardVisibility(){
+        return frontCard.getVisibility();
     }
 
     // endregion
