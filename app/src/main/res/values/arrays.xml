@@ -27,6 +27,51 @@
         <item>Miranda Kerr</item>
     </array>
 
+    <array name="cities">
+        <item>Madrid</item>
+        <item>New York</item>
+        <item>London</item>
+        <item>Paris</item>
+        <item>Dublin</item>
+        <item>Roma</item>
+    </array>
+
+    <array name="professions">
+        <item>Actress</item>
+        <item>Model</item>
+        <item>Doctor</item>
+        <item>Journalist</item>
+        <item>Politician</item>
+        <item>Score</item>
+    </array>
+
+    <array name="ages">
+        <item>22</item>
+        <item>25</item>
+        <item>32</item>
+        <item>31</item>
+        <item>29</item>
+        <item>25</item>
+    </array>
+
+    <array name="smoking">
+        <item>yes</item>
+        <item>no</item>
+        <item>sometimes</item>
+        <item>Even in the shower</item>
+        <item>Never</item>
+        <item>Only illegal dugs</item>
+    </array>
+
+    <array name="children">
+        <item>yes</item>
+        <item>no</item>
+        <item>are you crazy?</item>
+        <item>maybe</item>
+        <item>I have 9</item>
+        <item>Children are little evils</item>
+    </array>
+
     <array name="avatar_urls">
         <item>file:///android_asset/marieta.jpeg</item>
         <item>http://imgs.globovision.com/8q4wW2b3CHzu0ZDlhmHrNPXK0ko=/700x0/smart/64b884d833924898bc8256e99bc5b410</item>
